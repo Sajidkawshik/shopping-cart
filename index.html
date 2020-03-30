@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="decrementItem1" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="itemNumber1" type="text" class="form-control text-center" value="1">
+                           <button id="incrementItem1" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$<span id="iphonePrice">1219</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="decrementItem2" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="itemNumber2" type="text" class="form-control text-center" value="1">
+                           <button id="incrementItem2" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$<span id="iphoneCasePrice">59</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$<span id="subtotal">1278</span></h5>
+                        <h5>$0</h5>
+                        <h5>$ <span id="total">1278</span></h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      const decrementbtn = document.getElementById("decrementItem1");
+      decrementbtn.addEventListener("click", function () {
+         const showItem = document.getElementById("itemNumber1").value;
+         const showItemNumber = parseFloat(showItem);
+         if (showItemNumber > 0) {
+            decrementInputText("itemNumber1", showItemNumber);
+            singleItemTotalPrice("iphonePrice", "itemNumber1", 1219);
+            totalPrice();
+         }
+
+
+      })
+
+      const incrementbtn = document.getElementById("incrementItem1");
+      incrementbtn.addEventListener("click", function () {
+         const showItem = document.getElementById("itemNumber1").value;
+         const showItemNumber = parseFloat(showItem);
+         incrementInputText("itemNumber1", showItemNumber);
+         singleItemTotalPrice("iphonePrice", "itemNumber1", 1219);
+         totalPrice();
+
+
+      })
+
+      const decrementbtn2 = document.getElementById("decrementItem2");
+      decrementbtn2.addEventListener("click", function () {
+         const showItem2 = document.getElementById("itemNumber2").value;
+         const showItemNumber2 = parseFloat(showItem2);
+         if (showItemNumber2 > 0) {
+            decrementInputText("itemNumber2", showItemNumber2);
+            singleItemTotalPrice("iphoneCasePrice", "itemNumber2", 59);
+            totalPrice();
+         }
+
+      })
+
+      const incrementbtn2 = document.getElementById("incrementItem2");
+      incrementbtn2.addEventListener("click", function () {
+         const showItem2 = document.getElementById("itemNumber2").value;
+         const showItemNumber2 = parseFloat(showItem2);
+         incrementInputText("itemNumber2", showItemNumber2);
+         singleItemTotalPrice("iphoneCasePrice", "itemNumber2", 59);
+         totalPrice();
+
+      })
+
+
+      function decrementInputText(id, showItemNumber) {
+         const updatedItem = showItemNumber - 1;
+         document.getElementById(id).value = updatedItem;
+
+      }
+
+      function incrementInputText(id, showItemNumber) {
+         const updatedItem = showItemNumber + 1;
+         document.getElementById(id).value = updatedItem;
+
+      }
+
+      function singleItemTotalPrice(idPrice, idAmount, singlePrice) {
+         const iphonePrice = document.getElementById(idPrice).innerText;
+         const numberOfIphones = document.getElementById(idAmount).value;
+         const iphonePriceTotal = singlePrice * numberOfIphones;
+         document.getElementById(idPrice).innerText = iphonePriceTotal;
+      }
+
+      function totalPrice() {
+         const total = document.getElementById("subtotal").innerText;
+         const subtotal1 = document.getElementById("iphonePrice").innerText;
+         const subtotal1Amount = parseFloat(subtotal1);
+         const subtotal2 = document.getElementById("iphoneCasePrice").innerText;
+         const subtotal2Amount = parseFloat(subtotal2);
+         totalAmount = parseFloat(total);
+         totalAmount = subtotal1Amount + subtotal2Amount;
+         document.getElementById("subtotal").innerText = totalAmount;
+         document.getElementById("total").innerText = totalAmount;
+      }
+
+   </script>
+</body>
+
+</html>
